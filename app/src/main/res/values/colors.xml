@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="pchouse_green_light">#96BF0D</color>
+    <color name="pchouse_green_dark">#006633</color>
+    <color name="pchouse_green_medium">#006633</color>
+    <color name="bottom_menu_icons">@color/black</color>
+    <color name="separator_color">#5C5A5A</color>
+    <color name="field_error">#FCAB0202</color>
+    <color name="field_valid">#009309</color>
+    <color name="error_text">#FF5722</color>
+    <color name="dashboard_loader_background">#BB5C5C5C</color>
+    <color name="loader_background_color_dark">#CC000000</color>
+    <color name="loader_background_color_light">#CCFFFFFF</color>
+</resources>

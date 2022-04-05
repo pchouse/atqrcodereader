@@ -1,0 +1,21 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="card_margins">4dp</dimen>
+    <dimen name="text_size_general">19sp</dimen>
+    <dimen name="text_size_minimal">10sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_error">11sp</dimen>
+    <dimen name="settings_text_size">@dimen/text_size_general</dimen>
+    <dimen name="dashboard_text_size">@dimen/text_size_general</dimen>
+    <dimen name="dashboard_field_description">@dimen/text_size_minimal</dimen>
+    <dimen name="dashboard_field_info">12sp</dimen>
+    <dimen name="dashboard_source_info">9sp</dimen>
+    <dimen name="general_margin">9dp</dimen>
+    <dimen name="settings_margin_start">@dimen/general_margin</dimen>
+    <dimen name="settings_margin_top">@dimen/general_margin</dimen>
+    <dimen name="settings_margin_end">@dimen/general_margin</dimen>
+    <dimen name="qr_code_raw_text_size">12sp</dimen>
+    <dimen name="loader_alpha">0.5</dimen>
+</resources>

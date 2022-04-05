@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    android:id="@+id/fragment_home">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.camera.view.PreviewView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="@id/previewView">
+
+        <ImageView
+            android:contentDescription="@string/image_capture_center"
+            android:layout_width="199dp"
+            android:layout_height="199dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="39dp"
+            android:background="@drawable/reader_rect" />
+
+    </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/add_home_banner"
+        app:layout_constraintTop_toBottomOf="@id/previewView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="9sp"
+        ads:adSize="MEDIUM_RECTANGLE"
+        ads:adUnitId="@string/home_banner_bellow_image_capture"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
