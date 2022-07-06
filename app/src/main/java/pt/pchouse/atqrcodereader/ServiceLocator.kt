@@ -91,7 +91,7 @@ abstract class AServiceLocator : Application() {
     }
 
     /**
-     * Get the database acess
+     * Get the database access
      */
     open fun db(): AppDatabase {
         try {

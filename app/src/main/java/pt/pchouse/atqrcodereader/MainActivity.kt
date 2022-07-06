@@ -33,24 +33,27 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import pt.pchouse.atqrcodereader.databinding.ActivityMainBinding
 import pt.pchouse.atqrcodereader.publicity.AppOpenManager
 
+
 class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        val LOG_TAG : String = MainActivity::class.qualifiedName!!
+        val LOG_TAG: String = MainActivity::class.qualifiedName!!
+
         @SuppressLint("StaticFieldLeak")
         private var context: Context? = null
         private lateinit var bottomNavView: BottomNavigationView
         private lateinit var appOpenManager: AppOpenManager
 
+        var IsRGPDChecked = false
+
         /**
          * Get the bottom Navigation View
          */
-        fun getBottomNavView(): BottomNavigationView{
+        fun getBottomNavView(): BottomNavigationView {
             return bottomNavView
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(LOG_TAG, "onCreate called")
@@ -77,12 +80,17 @@ class MainActivity : AppCompatActivity() {
         Log.i(LOG_TAG, "Going to set Navigation Controller")
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_settings))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_settings
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
 
         Log.d(LOG_TAG, "Navigation Controller is set")
     }
+
+
 
 }

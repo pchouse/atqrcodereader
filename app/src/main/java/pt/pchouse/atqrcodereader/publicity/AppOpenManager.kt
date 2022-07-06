@@ -21,25 +21,26 @@ package pt.pchouse.atqrcodereader.publicity
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
+import com.google.ads.consent.*
+import com.google.ads.mediation.admob.AdMobAdapter
+import com.google.android.gms.ads.*
 import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import pt.pchouse.atqrcodereader.MainActivity
+import pt.pchouse.atqrcodereader.R
 import pt.pchouse.atqrcodereader.ServiceLocator
-
+import java.net.MalformedURLException
+import java.net.URL
 
 /** Prefetches App Open Ads.  */
 class AppOpenManager(private val mainActivity: MainActivity) : DefaultLifecycleObserver,
@@ -52,16 +53,103 @@ class AppOpenManager(private val mainActivity: MainActivity) : DefaultLifecycleO
         private var wasShow: Boolean = false
         private const val MAX_RETRIES = 2
         private var retries = 0
+        var personalized = false
+        var consentForm: ConsentForm? = null
+
+        /**
+         * Set the application RGPD status consent, to be called
+         * after close RGPD consent form or verify that is out side of UE
+         */
+        fun setApplicationContentStatus(context: Context, consentStatus: ConsentStatus) {
+            ConsentInformation.getInstance(context).consentStatus = consentStatus
+            personalized = consentStatus == ConsentStatus.PERSONALIZED
+            isPersonalizedAddsInSettings(
+                context.applicationContext, personalized
+            )
+        }
+
+        /**
+         * Open consent form
+         */
+        fun openConsentForm(context: Context) {
+
+                var privacyUrl: URL? = null
+
+                try {
+                    privacyUrl = URL(context.getString(R.string.privacy_url))
+                } catch (e: MalformedURLException) {
+                    personalized = false
+                }
+
+                consentForm = ConsentForm.Builder(context, privacyUrl)
+                    .withListener(RGPDConsentFormListener(context))
+                    .withPersonalizedAdsOption()
+                    .withNonPersonalizedAdsOption()
+                    //.withAdFreeOption()
+                    .build()
+
+                consentForm!!.load()
+
+        }
+
+        /**
+         * Gets or set in preferences if the adds are personalized
+         */
+        fun isPersonalizedAddsInSettings(
+            context: Context,
+            isPersonalized: Boolean? = null
+        ): Boolean? {
+            val sharedPref: SharedPreferences = context.getSharedPreferences(
+                context.getString(R.string.publicity_shared_file),
+                AppCompatActivity.MODE_PRIVATE
+            )
+
+            val key = context.resources.getString(R.string.ads_personalized)
+
+            if (isPersonalized == null) {
+                if (!sharedPref.contains(key)) {
+                    return null
+                }
+                return sharedPref.getBoolean(key, false)
+            }
+
+            val editor = sharedPref.edit()
+            editor.putBoolean(key, isPersonalized)
+            editor.commit()
+
+            return isPersonalized
+        }
+
+        /**
+         * Check if is mandatory to open RGPD form and if yes open it
+         */
+        fun checkRGPD(context: Context) {
+
+            val consentInformation: ConsentInformation = ConsentInformation.getInstance(context.applicationContext)
+            val publisherIds = arrayOf(context.getString(R.string.publisherID))
+
+            consentInformation.requestConsentInfoUpdate(
+                publisherIds, RGPDConsentInfoUpdateListener(context)
+            )
+        }
+
+        /**
+         * Get if call is from UE
+         */
+        fun isRequestLocationInEeaOrUnknown(context: Context): Boolean{
+            return ConsentInformation.getInstance(context.applicationContext).isRequestLocationInEeaOrUnknown
+        }
+
     }
 
     private var appOpenAd: AppOpenAd? = null
     private var loadCallback: AppOpenAdLoadCallback? = null
-    private lateinit var lifecycleOwner : LifecycleOwner
+    private lateinit var lifecycleOwner: LifecycleOwner
 
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             mainActivity.registerActivityLifecycleCallbacks(this)
-        }else{
+        } else {
             mainActivity.application.registerActivityLifecycleCallbacks(this)
         }
         mainActivity.lifecycle.addObserver(this)
@@ -110,7 +198,15 @@ class AppOpenManager(private val mainActivity: MainActivity) : DefaultLifecycleO
 
     /** Creates and returns ad request.  */
     private val adRequest: AdRequest
-        get() = AdRequest.Builder().build()
+        get() {
+            val buildRequest = AdRequest.Builder()
+            if (!personalized) {
+                val extras = Bundle()
+                extras.putString("npa", "1")
+                buildRequest.addNetworkExtrasBundle(AdMobAdapter::class.java, extras)
+            }
+            return buildRequest.build()
+        }
 
     /** Utility method that checks if ad exists and can be shown.  */
     private val isAdAvailable: Boolean

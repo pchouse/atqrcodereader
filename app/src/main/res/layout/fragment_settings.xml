@@ -73,6 +73,20 @@
         app:layout_constraintTop_toBottomOf="@id/settings_label_api_url"
         android:autofillHints="" />
 
+    <Button
+        android:id="@+id/open_rgpd_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rgpd_consent"
+        android:layout_marginStart="@dimen/settings_margin_start"
+        android:layout_marginTop="@dimen/settings_margin_top"
+        android:layout_marginEnd="@dimen/settings_margin_end"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_api_url"
+        />
 
     <View
         android:id="@+id/settings_add_separator"
@@ -83,7 +97,7 @@
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/add_settings_banner_bottom"
-        app:layout_constraintTop_toBottomOf="@id/settings_add_separator"
+        app:layout_constraintTop_toBottomOf="@id/open_rgpd_form"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
@@ -93,5 +107,7 @@
         android:layout_marginTop="9sp"
         app:adSize="MEDIUM_RECTANGLE"
         app:adUnitId="@string/settings_banner_bottom"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

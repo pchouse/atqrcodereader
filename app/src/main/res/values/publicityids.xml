@@ -19,11 +19,13 @@
 
 <resources>
     <!-- Production ids
-        <string name="app_opening" translatable="false"></string>
-        <string name="banner_1" translatable="false"></string>
-        <string name="banner_2" translatable="false"></string>
+        <string name="publisherID" translatable="false">pub-???????</string>
+        <string name="app_opening" translatable="false">ca-app-pub-?????/?????</string>
+        <string name="banner_1" translatable="false">ca-app-pub-??????/??????</string>
+        <string name="banner_2" translatable="false">ca-app-pub-?????/?????</string>
     -->
-    <!-- Test ids -->
+
+    <string name="publisherID" translatable="false">pub-??????????</string>
     <string name="app_opening" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
     <string name="banner_1" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_2" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
@@ -32,4 +34,9 @@
     <string name="home_banner_bellow_image_capture" translatable="false">@string/banner_1</string>
     <string name="dashboard_banner_above_fields" translatable="false">@string/banner_2</string>
     <string name="settings_banner_bottom" translatable="false">@string/banner_1</string>
+
+    <string name="ads_personalized" translatable="false">ads_personalized</string>
+    <string name="publicity_shared_file" translatable="false">publicity_shared_file</string>
+    <string name="privacy_url" translatable="false">https://www.pchouse.pt/pchouse_qr_code_privacy.txt</string>
+
 </resources>

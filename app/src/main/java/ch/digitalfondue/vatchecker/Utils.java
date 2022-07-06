@@ -102,7 +102,7 @@ class Utils {
                 dbFactory.setXIncludeAware(false);
                 dbFactory.setExpandEntityReferences(false);
             } catch (UnsupportedOperationException e) {
-
+                // ignore
             }
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             return dBuilder.parse(new InputSource(reader));

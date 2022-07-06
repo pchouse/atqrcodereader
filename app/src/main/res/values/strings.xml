@@ -123,4 +123,5 @@
     <string name="document_without_vat_must_be_zero">Document without VAT field must be 0 (zero)</string>
     <string name="qr_code_can_not_have_line_control_character">QR code raw text cannot have line control characters like carrier return, line feed, tab, etc</string>
     <string name="qr_code_can_not_end_with_blank_space">QR code raw txt cannot terminate with blank spaces, the string should be trimmed</string>
+    <string name="rgpd_consent">GDPR Consent</string>
 </resources>

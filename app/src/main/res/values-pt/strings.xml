@@ -124,4 +124,5 @@
     <string name="document_without_vat_must_be_zero">Documento sem IVA, campo deve ser 0 (zero)</string>
     <string name="qr_code_can_not_have_line_control_character">O texto bruto do código QR não pode ter caracteres de controle de linha, como nova linha, tabulação, retorno na linha, etc</string>
     <string name="qr_code_can_not_end_with_blank_space">O texto bruto do código QR não pode terminar com espaços em branco, a string deve ser cortada</string>
+    <string name="rgpd_consent">Consentimento RGPD</string>
 </resources>

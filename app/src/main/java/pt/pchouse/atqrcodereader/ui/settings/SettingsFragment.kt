@@ -30,6 +30,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import pt.pchouse.atqrcodereader.databinding.FragmentSettingsBinding
+import pt.pchouse.atqrcodereader.publicity.AppOpenManager
 import kotlin.system.exitProcess
 
 class SettingsFragment : Fragment() {
@@ -106,6 +107,15 @@ class SettingsFragment : Fragment() {
                 settingsViewModel.updateDb()
             }
 
+            if (AppOpenManager.isRequestLocationInEeaOrUnknown(requireContext())) {
+                _binding!!.openRgpdForm.visibility = View.VISIBLE
+
+                _binding!!.openRgpdForm.setOnClickListener {
+                        AppOpenManager.openConsentForm(requireContext())
+                }
+            }else {
+                _binding!!.openRgpdForm.visibility = View.INVISIBLE
+            }
         } catch (e: Exception) {
             Log.e(LOG_TAG, e.message ?: "unknown error")
         }

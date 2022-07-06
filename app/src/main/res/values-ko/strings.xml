@@ -124,4 +124,5 @@
     <string name="document_without_vat_must_be_zero">VAT가 없는 문서, 필드는 0(영) 이어야 합니다</string>
     <string name="qr_code_can_not_have_line_control_character">QR 코드 원시 텍스트에는 반송파 반환, 줄 바꿈, 탭 등과 같은 줄 제어 문자가 포함될 수 없습니다</string>
     <string name="qr_code_can_not_end_with_blank_space">QR 코드 원시 텍스트는 공백으로 끝날 수 없습니다. 문자열을 잘라야 합니다</string>
+    <string name="rgpd_consent">GDPR 동의</string>
 </resources>

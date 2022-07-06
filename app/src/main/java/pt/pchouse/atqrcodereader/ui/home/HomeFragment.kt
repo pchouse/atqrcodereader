@@ -38,16 +38,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.ads.consent.ConsentInformation
+import com.google.ads.consent.ConsentStatus
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import pt.pchouse.atqrcodereader.MainActivity
 import pt.pchouse.atqrcodereader.R
 import pt.pchouse.atqrcodereader.ServiceLocator
 import pt.pchouse.atqrcodereader.databinding.FragmentHomeBinding
 import pt.pchouse.atqrcodereader.logic.ImageAnalyzer
+import pt.pchouse.atqrcodereader.publicity.AppOpenManager
 import pt.pchouse.atqrcodereader.ui.settings.Model
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -115,6 +119,18 @@ class HomeFragment : Fragment() {
         mAdView = binding.fragmentHome.findViewById(R.id.add_home_banner)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+
+       if(AppOpenManager.isPersonalizedAddsInSettings(requireContext()) == null) {
+           AppOpenManager.checkRGPD(requireContext())
+           AppOpenManager.openConsentForm(requireContext())
+           MainActivity.IsRGPDChecked = true
+       }else if(!MainActivity.IsRGPDChecked) {
+           AppOpenManager.checkRGPD(requireContext())
+           if(ConsentInformation.getInstance(context).consentStatus == ConsentStatus.UNKNOWN){
+               AppOpenManager.openConsentForm(requireContext())
+           }
+           MainActivity.IsRGPDChecked = true
+       }
 
         return binding.root
     }
