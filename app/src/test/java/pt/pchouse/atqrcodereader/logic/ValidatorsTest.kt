@@ -203,7 +203,7 @@ class ValidatorsTest {
                 false to listOf(Pair("FT A/999", "20231231"))
             ),
             "A".padEnd(9, 'A') + "-999" to mapOf(
-                false to listOf(Pair("FT A/999", "20231231"))
+                true to listOf(Pair("FT A/999", "20231231"))
             ),
             "A".padEnd(7, 'A') + "-999" to mapOf(
                 false to listOf(Pair("FT A/999", "20231231"))

@@ -21,6 +21,7 @@ package pt.pchouse.atqrcodereader
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -43,6 +44,7 @@ abstract class AServiceLocator : Application() {
         private var context: Context? = null
     }
 
+    @SuppressLint("DiscouragedApi")
     open fun getString(name: String): String {
         return try {
             val id: Int = getMainContext().resources.getIdentifier(
@@ -112,11 +114,19 @@ abstract class AServiceLocator : Application() {
     /**
      * Get app version
      */
+    @Suppress("DEPRECATION")
     open fun appVersion(): String {
         return try {
-            getMainContext().packageManager.getPackageInfo(
-                getMainContext().packageName, 0
-            ).versionName
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                getMainContext().packageManager.getPackageInfo(
+                    getMainContext().packageName,
+                    PackageManager.PackageInfoFlags.of(0)
+                ).versionName
+            } else {
+                getMainContext().packageManager.getPackageInfo(
+                    getMainContext().packageName, 0
+                ).versionName
+            }
         }catch (_: Throwable){
             ""
         }

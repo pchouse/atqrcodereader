@@ -181,7 +181,7 @@ object Validators {
                 )
             }
 
-            if (atcud.length > 70 || !atcud.matches(Regex("^[0-9A-Z]{8}-[0-9]+\$"))) {
+            if (atcud.length > 70 || !atcud.matches(Regex("^[0-9A-Z]{8,}-[0-9]+\$"))) {
                 return ValidatorResult(
                     false, mutableListOf(
                         ServiceLocator.locate.getString("value_not_valid")
