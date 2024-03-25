@@ -18,18 +18,11 @@
   -->
 
 <resources>
-    <!-- Production ids
-        <string name="publisherID" translatable="false">pub-???????</string>
-        <string name="app_opening" translatable="false">ca-app-pub-?????/?????</string>
-        <string name="banner_1" translatable="false">ca-app-pub-??????/??????</string>
-        <string name="banner_2" translatable="false">ca-app-pub-?????/?????</string>
-    -->
 
     <string name="publisherID" translatable="false">pub-??????????</string>
     <string name="app_opening" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
     <string name="banner_1" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_2" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-
 
     <string name="home_banner_bellow_image_capture" translatable="false">@string/banner_1</string>
     <string name="dashboard_banner_above_fields" translatable="false">@string/banner_2</string>

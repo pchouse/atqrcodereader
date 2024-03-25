@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "pt.pchouse.atqrcodereader"
         minSdk 21
-        targetSdk 33
-        versionCode 4
-        versionName "4"
+        targetSdk 34
+        versionCode 5
+        versionName '5'
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testApplicationId "pt.pchouse.atqrcodereader.test"
@@ -41,6 +41,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'pt.pchouse.atqrcodereader'
 }
 
 apply plugin: 'kotlin-kapt'
